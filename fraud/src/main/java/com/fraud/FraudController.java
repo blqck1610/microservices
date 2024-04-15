@@ -21,7 +21,6 @@ public class FraudController {
     }
     @GetMapping("/test")
     public ResponseEntity<String> test() {
-
         return ResponseEntity.ok("ok");
     }
 }

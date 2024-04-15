@@ -1,8 +1,9 @@
 package com.demo.customer;
 
+import com.clients.fraud.FraudCheckResponse;
+import com.clients.fraud.FraudClient;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,8 +11,9 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class CustomerService {
     private final CustomerRepository customerRepository;
-
     private final RestTemplate restTemplate;
+    private final FraudClient fraudClient;
+
     public void registerCustomer(@NotNull CustomerRegistrationRequest customerRegistrationRequest) {
         Customer customer = Customer.builder().name(customerRegistrationRequest.name()).email(customerRegistrationRequest.email()).build();
 
@@ -19,7 +21,7 @@ public class CustomerService {
         // todo: check if fraudster
         customerRepository.saveAndFlush(customer);
 
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject("http://localhost:8081/api/v1/fraud-check/{customerId}", FraudCheckResponse.class, customer.getId());
+        FraudCheckResponse fraudCheckResponse = fraudClient.isFraud(customer.getId());
 
         // todo: send notification
         assert fraudCheckResponse != null;
