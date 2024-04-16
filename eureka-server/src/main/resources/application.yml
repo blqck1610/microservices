@@ -8,3 +8,14 @@ eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
+
+# tracing
+
+# All traces should be sent to latency analysis tool
+
+
+
+# traceID and spanId are predefined MDC keys - we want the logs to include them
+logging:
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'

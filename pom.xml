@@ -16,6 +16,7 @@
         <module>fraud</module>
         <module>eureka-server</module>
         <module>clients</module>
+        <module>notification</module>
     </modules>
 
 
@@ -59,6 +60,9 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+<!--        tracing-->
+
+
 
     </dependencies>
 
