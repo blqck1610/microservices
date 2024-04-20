@@ -20,6 +20,9 @@ spring:
       ddl-auto: create-drop
     show-sql: 'true'
 
+  rabbitmq:
+    addresses: localhost:5672
+
 #eureka-client
 eureka:
   client:
@@ -43,3 +46,11 @@ management:
 logging:
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
+rabbitmq:
+  exchanges:
+    internal: internal.exchanges
+  queue:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal.notification.routing-keys

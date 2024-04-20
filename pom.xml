@@ -18,6 +18,7 @@
         <module>clients</module>
         <module>notification</module>
         <module>api-gateway</module>
+        <module>amqp</module>
     </modules>
 
 
@@ -61,7 +62,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-<!--        tracing-->
+
 
 
 

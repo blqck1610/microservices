@@ -1,4 +1,4 @@
-package com.demo.customer;
+package com.customer;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

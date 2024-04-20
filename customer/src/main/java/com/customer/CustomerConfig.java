@@ -1,4 +1,4 @@
-package com.demo.customer;
+package com.customer;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;

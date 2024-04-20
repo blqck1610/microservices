@@ -19,6 +19,8 @@ spring:
       #      create-drop, create , update
       ddl-auto: create-drop
     show-sql: 'true'
+  rabbitmq:
+    addresses: localhost:5672
 eureka:
   client:
     service-url:
@@ -30,14 +32,24 @@ eureka:
 management:
   tracing:
     sampling:
-      probability: 1
+      probability: 1.0
   zipkin:
     tracing:
       enabled: true
+
 
 # traceID and spanId are predefined MDC keys - we want the logs to include them
 logging:
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
+#    rabbitmq
+rabbitmq:
+  exchanges:
+    internal: internal.exchanges
+  queue:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal.notification.routing-keys
 
 

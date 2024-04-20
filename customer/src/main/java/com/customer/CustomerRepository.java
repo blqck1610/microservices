@@ -1,4 +1,4 @@
-package com.demo.customer;
+package com.customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
