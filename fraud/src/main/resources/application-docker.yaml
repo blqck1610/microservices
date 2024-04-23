@@ -33,7 +33,7 @@ management:
     enabled: true
   zipkin:
     tracing:
-      endpoint: http://zipkin:9411
+      endpoint: http://zipkin-server:9411/api/v2/spans
 
 
 # traceID and spanId are predefined MDC keys - we want the logs to include them
