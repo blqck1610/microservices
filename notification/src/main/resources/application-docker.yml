@@ -34,9 +34,9 @@ management:
     sampling:
       probability: 1.0
     enabled: true
-  zipkin:
-    tracing:
-      endpoint: http://zipkin-server:9411/api/v2/spans
+#  zipkin:
+#    tracing:
+#      endpoint: http://zipkin:9411/api/v2/spans
 
 
 # traceID and spanId are predefined MDC keys - we want the logs to include them

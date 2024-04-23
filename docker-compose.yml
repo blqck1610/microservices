@@ -77,6 +77,7 @@ services:
       - zipkin
       - eureka-server
     environment:
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin:9411/api/v2/spans
       - SPRING_PROFILES_ACTIVE=docker
   customer:
     image: blqck/customer:latest
@@ -90,7 +91,10 @@ services:
       - zipkin
       - eureka-server
       - api-gateway
+      - postgres
+      - rabbitmq
     environment:
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin:9411/api/v2/spans
       - SPRING_PROFILES_ACTIVE=docker
   fraud:
     image: blqck/fraud:latest
@@ -104,7 +108,10 @@ services:
       - zipkin
       - eureka-server
       - api-gateway
+      - postgres
+      - rabbitmq
     environment:
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin:9411/api/v2/spans
       - SPRING_PROFILES_ACTIVE=docker
   notification:
     image: blqck/notification:latest
@@ -118,7 +125,10 @@ services:
       - zipkin
       - eureka-server
       - api-gateway
+      - postgres
+      - rabbitmq
     environment:
+      - MANAGEMENT.ZIPKIN.TRACING.ENDPOINT=http://zipkin:9411/api/v2/spans
       - SPRING_PROFILES_ACTIVE=docker
 
 
