@@ -43,28 +43,83 @@ services:
     container_name: zipkin
     ports:
       - "9411:9411"
+    networks:
+      - spring
+
   rabbitmq:
     image: rabbitmq:3.9.11-management-alpine
     container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - spring
   eureka-server:
-    image: blqck/euraka-server:latest
+    image: blqck/eureka-server:latest
     container_name: eureka-server
     ports:
       - "8761:8761"
+    networks:
+      - spring
     depends_on:
-      -zipkin
+      - zipkin
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 
   api-gateway:
     image: blqck/api-gateway:latest
     container_name: api-gateway
     ports:
       - "8083:8083"
+    networks:
+      - spring
     depends_on:
-      -zipkin
-      -eureka-server
+      - zipkin
+      - eureka-server
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  customer:
+    image: blqck/customer:latest
+    container_name: customer
+    ports:
+      - "8080:8080"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+      - api-gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  fraud:
+    image: blqck/fraud:latest
+    container_name: fraud
+    ports:
+      - "8081:8081"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+      - api-gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  notification:
+    image: blqck/notification:latest
+    container_name: notification
+    ports:
+      - "8082:8082"
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      - eureka-server
+      - api-gateway
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
 
 
 

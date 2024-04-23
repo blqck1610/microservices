@@ -7,7 +7,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: admin
-    url: jdbc:postgresql://localhost:5432/notification
+    url: jdbc:postgresql://postgres:5432/notification
     password: password
 
   jpa:
@@ -20,11 +20,11 @@ spring:
       ddl-auto: create-drop
     show-sql: 'true'
   rabbitmq:
-    addresses: localhost:5672
+    addresses: rabbitmq:5672
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://eureka-server:8761/eureka
 
 # tracing
 
@@ -33,9 +33,10 @@ management:
   tracing:
     sampling:
       probability: 1.0
+    enabled: true
   zipkin:
     tracing:
-      endpoint: http://localhost:9411
+      endpoint: http://zipkin:9411
 
 
 # traceID and spanId are predefined MDC keys - we want the logs to include them

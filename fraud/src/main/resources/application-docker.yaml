@@ -1,13 +1,13 @@
 server:
-  port: 8082
+  port: 8081
 
 spring:
   application:
-    name: notification
+    name: fraud
   datasource:
     driver-class-name: org.postgresql.Driver
     username: admin
-    url: jdbc:postgresql://localhost:5432/notification
+    url: jdbc:postgresql://postgres:5432/fraud
     password: password
 
   jpa:
@@ -16,16 +16,13 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format-sql: 'true'
     hibernate:
-      #      create-drop, create , update
+#      create-drop, create , update
       ddl-auto: create-drop
     show-sql: 'true'
-  rabbitmq:
-    addresses: localhost:5672
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
-
+      defaultZone: http://eureka-server:8761/eureka
 # tracing
 
 # All traces should be sent to latency analysis tool
@@ -33,23 +30,13 @@ management:
   tracing:
     sampling:
       probability: 1.0
+    enabled: true
   zipkin:
     tracing:
-      endpoint: http://localhost:9411
+      endpoint: http://zipkin:9411
 
 
 # traceID and spanId are predefined MDC keys - we want the logs to include them
 logging:
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
-
-#    rabbitmq
-rabbitmq:
-  exchanges:
-    internal: internal.exchanges
-  queue:
-    notification: notification.queue
-  routing-keys:
-    internal-notification: internal.notification.routing-keys
-
-

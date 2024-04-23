@@ -9,6 +9,7 @@ eureka:
     fetch-registry: false
     register-with-eureka: false
 
+
 # tracing
 
 # All traces should be sent to latency analysis tool
